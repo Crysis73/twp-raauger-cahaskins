@@ -1,12 +1,39 @@
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class testTWP {
+
     @Test
-    public void testRevisionParser(){
+    public void testgetRevisions(){
         RevisionParser parser = new RevisionParser();
-        int count = parser.countRevisions();
-        Assert.assertEquals(4,count);
-        //hello
+        JsonArray array = parser.getRevisions();
+
+    }
+    @Test
+    public void testgetUsername(){
+        RevisionParser parser = new RevisionParser();
+        JsonArray array = parser.getRevisions();
+        String result = parser.getUsername(array,0);
+        Assert.assertEquals("SemiHypercube",result);
+    }
+    @Test
+    public void testgetTimestamp(){
+        RevisionParser parser = new RevisionParser();
+        JsonArray array = parser.getRevisions();
+        String result = parser.getTimestamp(array,0);
+        Assert.assertEquals("2018-08-14T20:34:45Z",result);
+    }
+    @Test
+    public void testgetRevisionList(){
+        RevisionParser parser = new RevisionParser();
+        JsonArray array = parser.getRevisions();
+        List<Revision> revisionList = parser.getRevisionList(array);
+        for(int i =0;i<revisionList.size();i++) {
+            System.out.println(revisionList.get(i).toString());
+        }
     }
 }
