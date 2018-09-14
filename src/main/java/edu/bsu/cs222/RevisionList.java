@@ -6,9 +6,9 @@ import java.util.*;
 public class RevisionList{
     private List<Revision> revisionList;
 
-    public RevisionList(String fileName){
-        RevisionParser parser = new RevisionParser(fileName);
-        this.revisionList = parser.getRevisions();
+    public RevisionList(String searchTerm){
+        RevisionParser parser = new RevisionParser();
+        this.revisionList = parser.getRevisions(searchTerm);
     }
 
     public List<Revision> sortByTimestamp(){
@@ -16,7 +16,7 @@ public class RevisionList{
             for(int j=i+1;j<revisionList.size();j++){
                 Timestamp firstTimestamp = revisionList.get(i).getTimestamp();
                 Timestamp secondTimestamp = revisionList.get(j).getTimestamp();
-                if(firstTimestamp.after(secondTimestamp)){
+                if(firstTimestamp.before(secondTimestamp)){
                     Revision temp = revisionList.get(i);
                     revisionList.set(i,revisionList.get(j) );
                     revisionList.set(j,temp);
@@ -29,7 +29,6 @@ public class RevisionList{
     public Map<String,Integer> countEditsPerUser(){
         Map<String,Integer> revisionCounter = new HashMap<String, Integer>();
         Integer numberOfRevisions = 1;
-        System.out.println(revisionCounter);
         for(int i=0;i<revisionList.size();i++) {
             if(revisionCounter.containsKey(get(i).getUsername())) {
                 String key = revisionList.get(i).getUsername();
@@ -39,9 +38,30 @@ public class RevisionList{
                 revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
             }
         }
+        /*
+        Integer[] values = revisionCounter.values().toArray(new Integer[revisionCounter.size()]);
+        QuickSort quickSort = new QuickSort(values);
+        quickSort.quickSort(values,0,revisionCounter.size());
+        System.out.println(quickSort.toString());
+        */
         return revisionCounter;
+
     }
 
+    /*
+    public List<Revision> sortByNumberOfEdits(){
+       Map<String,Integer> editsPerUser = countEditsPerUser();
+       Integer largest = 0;
+       for(int i=0;i<editsPerUser.size();i++){
+           if(editsPerUser.get(i).intValue()>largest){
+               largest = editsPerUser.get(i).intValue();
+               sortByNumberOfEdits();
+           } else{
+
+           }
+       }
+    }
+    */
 
 
     public int size(){
