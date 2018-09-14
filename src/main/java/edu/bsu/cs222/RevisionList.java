@@ -1,8 +1,7 @@
 package edu.bsu.cs222;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RevisionList{
     private List<Revision> revisionList;
@@ -26,6 +25,24 @@ public class RevisionList{
         }
         return revisionList;
     }
+
+    public Map<String,Integer> countEditsPerUser(){
+        Map<String,Integer> revisionCounter = new HashMap<String, Integer>();
+        Integer numberOfRevisions = 1;
+        System.out.println(revisionCounter);
+        for(int i=0;i<revisionList.size();i++) {
+            if(revisionCounter.containsKey(get(i).getUsername())) {
+                String key = revisionList.get(i).getUsername();
+                Integer replacementValue = revisionCounter.get(key).intValue()+1;
+                revisionCounter.replace(key,replacementValue);
+            } else {
+                revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
+            }
+        }
+        return revisionCounter;
+    }
+
+
 
     public int size(){
         return revisionList.size();

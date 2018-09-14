@@ -10,5 +10,8 @@
         <module name="twpraaugercahaskins" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="twp-raauger-cahaskinstest" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -14,6 +14,9 @@ public class Revision {
     public Timestamp getTimestamp(){
         return timestamp;
     }
+    public String getUsername(){
+        return this.username;
+    }
 
     public String toString(){
         return "Username: "+username+" , Timestamp: "+timestamp;

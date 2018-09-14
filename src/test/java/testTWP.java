@@ -5,7 +5,9 @@ import edu.bsu.cs222.RevisionParser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class testTWP {
 
@@ -26,7 +28,16 @@ public class testTWP {
         for(int i =0;i<revisionList.size();i++) {
             System.out.println(revisionList.get(i).toString());
         }
-
+    }
+    @Test
+    public void testcountEditsPerUser(){
+        RevisionList revisionList = new RevisionList("sample.json");
+        Map<String,Integer> expectedResult = new HashMap<String, Integer>();
+        expectedResult.put("Jph",1);
+        expectedResult.put("SemiHypercube",5);
+        expectedResult.put("2605:6000:E501:E700:5C13:42F:83ED:316D",2);
+        Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
+        Assert.assertEquals(expectedResult,sortedListOfRevisions);
     }
 //    @Test
 //    public void testgetUsername(){
