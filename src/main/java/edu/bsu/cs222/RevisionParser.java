@@ -4,12 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import edu.bsu.cs222.Revision;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -23,8 +21,12 @@ public class RevisionParser {
     public List<Revision> getRevisions(String searchTerm) {
         JsonParser parser = new JsonParser();
         Query query = new Query();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(query.getContents(searchTerm));
-        Reader reader = new InputStreamReader(inputStream);
+        Reader reader = null;
+        try {
+            reader = query.getContents(searchTerm);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JsonElement rootElement = parser.parse(reader);
         JsonObject rootObject = rootElement.getAsJsonObject();
         JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");

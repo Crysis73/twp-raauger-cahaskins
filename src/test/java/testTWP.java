@@ -5,6 +5,12 @@ import edu.bsu.cs222.RevisionList;
 import edu.bsu.cs222.RevisionParser;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +39,12 @@ public class testTWP {
     @Test
     public void testgetContents(){
         Query query = new Query();
-        String result = query.getContents("soup");
+        Reader result = null;
+        try {
+            result = query.getContents("soup");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(result);
     }
 

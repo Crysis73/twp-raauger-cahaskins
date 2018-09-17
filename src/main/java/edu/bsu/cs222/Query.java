@@ -1,29 +1,19 @@
 package edu.bsu.cs222;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Scanner;
 
 public class Query {
 
-    public String getContents(String search){
-        URL url = null;
-        try {
-            url = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles="+search+"&r%20vprop=timestamp|user&rvlimit=25&redirects");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            Scanner s = new Scanner(url.openStream());
-            String fileContents = "";
-            while(s.hasNext()){
-                fileContents += s.nextLine();
-            }
-            return fileContents;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "nope";
+    public Reader getContents(String search) throws IOException {
+        URL url = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles="+search+"&r%20vprop=timestamp%7Cuser&rvlimit=25&redirects");
+        URLConnection connection = url.openConnection();
+        connection.setRequestProperty("User-Agent",
+                "Revision Tracker/0.1 (me@bsu.edu)");
+        Reader in = new InputStreamReader(connection.getInputStream());
+        return in;
     }
 }
