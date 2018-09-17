@@ -48,6 +48,12 @@ public class testTWP {
         System.out.println(result);
     }
 
+    @Test
+    public void testgetRedirects(){
+        RevisionParser revisionParser = new RevisionParser();
+        System.out.println(revisionParser.getRedirects("Soup"));
+    }
+
     /*
     public void testcountEditsPerUser(){
         RevisionList revisionList = new RevisionList("sample.json");
