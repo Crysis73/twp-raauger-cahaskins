@@ -16,8 +16,9 @@ import java.util.*;
 
 public class RevisionParser {
 
+    private JsonObject rootObject;
 
-    public List<Revision> getRevisions(String searchTerm) {
+    public RevisionParser(String searchTerm){
         JsonParser parser = new JsonParser();
         Query query = new Query();
         Reader reader = null;
@@ -27,7 +28,10 @@ public class RevisionParser {
             e.printStackTrace();
         }
         JsonElement rootElement = parser.parse(reader);
-        JsonObject rootObject = rootElement.getAsJsonObject();
+        this.rootObject = rootElement.getAsJsonObject();
+    }
+
+    public List<Revision> getRevisions() {
         JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
         JsonArray array = null;
         for (Map.Entry<String, JsonElement> entry : pages.entrySet()) {
@@ -43,17 +47,7 @@ public class RevisionParser {
         return revisionList;
 
     }
-    public String getRedirects(String searchTerm){
-        JsonParser parser = new JsonParser();
-        Query query = new Query();
-        Reader reader = null;
-        try {
-            reader = query.getContents(searchTerm);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JsonElement rootElement = parser.parse(reader);
-        JsonObject rootObject = rootElement.getAsJsonObject();
+    public String getRedirects(){
         if(rootObject.has("redirects")) {
             JsonObject redirects = rootObject.getAsJsonObject("query").getAsJsonArray("redirects").get(0).getAsJsonObject();
             String redirectToPageName = redirects.get("to").toString();
