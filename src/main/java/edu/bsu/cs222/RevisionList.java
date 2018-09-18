@@ -39,8 +39,8 @@ public class RevisionList{
                 revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
             }
         }
-        MapUtil sort = new MapUtil();
-        revisionCounter = (LinkedHashMap<String, Integer>) sort.sortByValue(revisionCounter);
+        MapUtil sorter = new MapUtil();
+        revisionCounter = (LinkedHashMap<String, Integer>) sorter.sortByValue(revisionCounter);
         return revisionCounter;
     }
 
