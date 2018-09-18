@@ -8,8 +8,8 @@ public class RevisionList{
     private List<Revision> revisionList;
 
     public RevisionList(String searchTerm){
-        RevisionParser parser = new RevisionParser();
-        this.revisionList = parser.getRevisions(searchTerm);
+        RevisionParser parser = new RevisionParser(searchTerm);
+        this.revisionList = parser.getRevisions();
     }
 
     public List<Revision> sortByTimestamp(){
