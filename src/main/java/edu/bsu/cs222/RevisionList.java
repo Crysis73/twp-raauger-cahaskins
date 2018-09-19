@@ -8,8 +8,8 @@ public class RevisionList{
     private List<Revision> revisionList;
 
     public RevisionList(String searchTerm){
-        RevisionParser parser = new RevisionParser();
-        this.revisionList = parser.getRevisions(searchTerm);
+        RevisionParser parser = new RevisionParser(searchTerm);
+        this.revisionList = parser.getRevisions();
     }
 
     public List<Revision> sortByTimestamp(){
@@ -39,25 +39,10 @@ public class RevisionList{
                 revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
             }
         }
-        MapUtil sort = new MapUtil();
-        revisionCounter = (LinkedHashMap<String, Integer>) sort.sortByValue(revisionCounter);
+        MapUtil sorter = new MapUtil();
+        revisionCounter = (LinkedHashMap<String, Integer>) sorter.sortByValue(revisionCounter);
         return revisionCounter;
     }
-
-/*
-    public List<Revision> sortByNumberOfEdits(){
-       LinkedHashMap<String,Integer> editsPerUser = countEditsPerUser();
-       Stack stack = new Stack();
-       revisionList = sortByTimestamp();
-       for(int i =0;i<editsPerUser.size();i++){
-
-       }
-    }
-    */
-
-
-
-
 
     public int size(){
         return revisionList.size();

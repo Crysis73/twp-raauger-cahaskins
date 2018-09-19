@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.nio.Buffer;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +19,7 @@ public class testTWP {
 
     @Test
     public void testgetRevisions(){
-        RevisionParser parser = new RevisionParser();
-        List<Revision> revisionList = parser.getRevisions("Soup");
+        RevisionList revisionList = new RevisionList("soup");
         for(int i =0;i<revisionList.size();i++) {
             System.out.println(revisionList.get(i).toString());
         }
@@ -52,10 +50,9 @@ public class testTWP {
     @Test
     public void testcountEditsPerUser(){
         RevisionList revisionList = new RevisionList("Soup");
-        Map<String,Integer> count = revisionList.countEditsPerUser();
-        System.out.println(count);
+        Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
+        System.out.println(sortedListOfRevisions);
        // Assert.assertEquals(expectedResult,sortedListOfRevisions);
-
     }
 
     /*

@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="twp-raauger-cahaskins" />
         <module name="twp-raauger-cahaskinstest" />
         <module name="twpraaugercahaskins" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="twp-raauger-cahaskins" target="8" />
       <module name="twp-raauger-cahaskinstest" target="1.5" />
     </bytecodeTargetLevel>
   </component>
