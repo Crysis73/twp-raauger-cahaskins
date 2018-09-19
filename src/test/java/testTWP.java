@@ -49,23 +49,13 @@ public class testTWP {
     }
 
     @Test
-    public void testgetRedirects(){
-        RevisionParser revisionParser = new RevisionParser();
-        System.out.println(revisionParser.getRedirects("Soup"));
-    }
-
-    /*
     public void testcountEditsPerUser(){
         RevisionList revisionList = new RevisionList("sample.json");
-        Map<String,Integer> expectedResult = new HashMap<String, Integer>();
-        expectedResult.put("Jph",1);
-        expectedResult.put("SemiHypercube",5);
-        expectedResult.put("2605:6000:E501:E700:5C13:42F:83ED:316D",2);
         Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
-        System.out.println(expectedResult + " " + sortedListOfRevisions);
+        System.out.println(sortedListOfRevisions);
        // Assert.assertEquals(expectedResult,sortedListOfRevisions);
     }
-    */
+
     /*
    @Test
     public void testgetUsername(){
