@@ -9,8 +9,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.bsu.cs222.Controller">
   <children>
-    <TextField alignment="CENTER" disable="false" focusTraversable="true" layoutX="200.0" layoutY="189.0" prefHeight="32.0" prefWidth="200.0" promptText="Article Name" text="" />
-    <Button layoutX="272.0" layoutY="225.0" mnemonicParsing="false" text="Search" />
+    <TextField fx:id="inputText" alignment="CENTER" disable="false" focusTraversable="true" layoutX="200.0" layoutY="189.0" prefHeight="32.0" prefWidth="200.0" promptText="Article Name" text="" />
+    <Button layoutX="272.0" layoutY="227.0" mnemonicParsing="false" onAction="#createRevisionList" text="Search" />
     <Text layoutX="212.0" layoutY="139.0" scaleX="1.6297128801051783" scaleY="2.00489476810923" strokeType="OUTSIDE" strokeWidth="0.0" text="Wikipedia Article Revision Search" />
+    <TextArea fx:id="outputText" layoutX="14.0" layoutY="248.0" prefHeight="152.0" prefWidth="572.0" wrapText="true" />
+    <Label layoutX="442.0" layoutY="14.0" prefHeight="35.0" prefWidth="68.0" text="Sort By Time" textAlignment="CENTER" />
+    <Button layoutX="520.0" layoutY="22.0" mnemonicParsing="false" onAction="#sortByTime" text="Sort" />
+    <Label layoutX="382.0" layoutY="43.0" prefHeight="35.0" prefWidth="133.0" text="Sort By Number of Edits" textAlignment="CENTER" />
+    <Button layoutX="520.0" layoutY="51.0" mnemonicParsing="false" text="Sort" />
   </children>
 </AnchorPane>

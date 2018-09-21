@@ -50,6 +50,20 @@ public class RevisionList{
     public Revision get(int i){
         return revisionList.get(i);
     }
+    public boolean isEmpty(){
+        if(this.revisionList.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public String toString(){
+        String result = "";
+        for(int i =0;i<revisionList.size();i++){
+            result+= "Editor " + (i+1) + " -- " + revisionList.get(i).toString() + "\n";
+        }
+        return result;
+    }
 
 
 }
