@@ -18,8 +18,9 @@ public class Revision {
         return this.username;
     }
 
+
     public String toString(){
-        return "Username: "+username+" , Timestamp: "+timestamp;
+        return "Username: "+username+" , Time: "+timestamp;
     }
 
 }
