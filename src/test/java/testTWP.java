@@ -1,8 +1,5 @@
 import com.google.gson.JsonArray;
-import edu.bsu.cs222.Query;
-import edu.bsu.cs222.Revision;
-import edu.bsu.cs222.RevisionList;
-import edu.bsu.cs222.RevisionParser;
+import edu.bsu.cs222.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,8 +16,8 @@ public class testTWP {
 
     @Test
     public void testgetRevisions(){
-        RevisionParser parser = new RevisionParser();
-        List<Revision> revisionList = parser.getRevisions("Soup");
+        RevisionParser parser = new RevisionParser("Soup");
+        List<Revision> revisionList = parser.getRevisions();
         for(int i =0;i<revisionList.size();i++) {
             System.out.println(revisionList.get(i).toString());
         }
@@ -50,8 +47,21 @@ public class testTWP {
 
     @Test
     public void testgetRedirects(){
-        RevisionParser revisionParser = new RevisionParser();
-        System.out.println(revisionParser.getRedirects("Soup"));
+        RevisionParser revisionParser = new RevisionParser("Soups");
+        System.out.println(revisionParser.getRedirects());
+    }
+
+  /*  @Test
+    public void testgetSortedByNumberOfRevisions(){
+        RevisionList revisionList = new RevisionList("Soup");
+        System.out.println(revisionList.sortByEditsPerUser());
+    }*/
+
+    @Test
+    public void testAuthorCreation(){
+        RevisionList revisionList = new RevisionList("Soup");
+        Author author = new Author("Jph");
+        author.addRevision(revisionList());
     }
 
     /*
