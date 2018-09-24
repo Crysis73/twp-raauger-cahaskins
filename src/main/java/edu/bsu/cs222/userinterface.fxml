@@ -13,6 +13,6 @@
     <Button layoutX="526.0" layoutY="43.0" mnemonicParsing="false" onAction="#createRevisionList" text="Search" />
     <Text layoutX="66.0" layoutY="38.0" scaleX="1.6297128801051783" scaleY="2.00489476810923" smooth="true" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Wikipedia Article Revision Search" />
     <TextArea fx:id="outputText" layoutX="11.0" layoutY="106.0" prefHeight="252.0" prefWidth="572.0" wrapText="true" />
-    <Button layoutX="276.0" layoutY="364.0" mnemonicParsing="false" onAction="#clearOutputText" text="Clear" />
+    <Button layoutX="276.0" layoutY="364.0" mnemonicParsing="false" onAction="#clearAllText" text="Clear" />
   </children>
 </AnchorPane>

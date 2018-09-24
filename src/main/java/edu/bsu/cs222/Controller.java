@@ -37,7 +37,7 @@ public class Controller extends Application {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "C:\\Users\\Casey Haskins\\IdeaProjects\\twp-raauger-cahaskins\\src\\main\\java\\edu\\bsu\\cs222\\userinterface.fxml";
+        String fxmlDocPath = "/Users/rebeccaauger/IdeaProjects/twp-raauger-cahaskins/src/main/java/edu/bsu/cs222/userinterface.fxml";
         FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
 
         // Create the Pane and all Details
