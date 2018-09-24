@@ -47,9 +47,11 @@ public class RevisionList{
     public int size(){
         return revisionList.size();
     }
+
     public Revision get(int i){
         return revisionList.get(i);
     }
+
     public boolean isEmpty(){
         if(this.revisionList.isEmpty()){
             return true;
@@ -64,6 +66,4 @@ public class RevisionList{
         }
         return result;
     }
-
-
 }

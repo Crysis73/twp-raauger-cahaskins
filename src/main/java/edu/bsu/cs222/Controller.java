@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import javax.xml.stream.util.StreamReaderDelegate;
 
 public class Controller extends Application {
@@ -32,8 +33,7 @@ public class Controller extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException
-    {
+    public void start(Stage stage) throws IOException {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
@@ -56,6 +56,7 @@ public class Controller extends Application {
     @FXML
     public void createRevisionList(ActionEvent actionEvent) {
         this.revisions = new RevisionList(inputText.getText());
+
         printOutput();
     }
     @FXML
@@ -63,6 +64,7 @@ public class Controller extends Application {
         String result = revisions.toString();
         outputText.setText(result);
     }
+    /*
     public void sortByTime(ActionEvent actionEvent){
         if(revisions.isEmpty()){
             outputText.setText("Please enter a search term so we have a list to sort! ");
@@ -71,6 +73,9 @@ public class Controller extends Application {
             printOutput();
         }
     }
-
-
+    */
+    public void clearAllText(ActionEvent actionEvent) {
+        outputText.setText("");
+        inputText.setText("");
+    }
 }
