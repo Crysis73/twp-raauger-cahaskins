@@ -60,8 +60,6 @@ public class testTWP {
     @Test
     public void testAuthorCreation(){
         RevisionList revisionList = new RevisionList("Soup");
-        Author author = new Author("Jph");
-        author.addRevision(revisionList());
     }
 
     /*
