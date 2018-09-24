@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class RevisionList{
     private List<Revision> revisionList;
@@ -9,7 +10,6 @@ public class RevisionList{
     public RevisionList(String searchTerm){
         RevisionParser parser = new RevisionParser(searchTerm);
         this.revisionList = parser.getRevisions();
-
     }
 
     public List<Revision> sortByTimestamp(){
@@ -27,10 +27,8 @@ public class RevisionList{
         return revisionList;
     }
 
-
-
-   /* public List<Revision> sortByEditsPerUser(){
-        Map<String,Integer> revisionCounter = new HashMap<String, Integer>();
+    public LinkedHashMap<String,Integer> countEditsPerUser(){
+        LinkedHashMap<String,Integer> revisionCounter = new LinkedHashMap<>();
         Integer numberOfRevisions = 1;
         for(int i=0;i<revisionList.size();i++) {
             if(revisionCounter.containsKey(get(i).getUsername())) {
@@ -41,77 +39,31 @@ public class RevisionList{
                 revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
             }
         }
-
-        List<Revision> sortedRevisionList = new LinkedList<Revision>();
-        while(!revisionCounter.isEmpty()) {
-            Map.Entry<String, Integer> max = null;
-            for (Map.Entry<String, Integer> e : revisionCounter.entrySet()) {
-                if (max == null || e.getValue() > max.getValue())
-                    max = e;
-            }
-            String mostCommonUsername = max.getKey();
-            for (int i = 0; i < revisionList.size(); i++) {
-                if (mostCommonUsername == revisionList.get(i).getUsername()) {
-                    sortedRevisionList.add(revisionList.get(i));
-                    revisionList.remove(i);
-                }
-            }
-            revisionCounter.remove(max);
-        }
-
-        return sortedRevisionList;
+        MapUtil sorter = new MapUtil();
+        revisionCounter = (LinkedHashMap<String, Integer>) sorter.sortByValue(revisionCounter);
+        return revisionCounter;
     }
-*/
-
-   /* public List<Revision> sortByNumberOfEdits(){
-
-        Map<String, Integer> editsPerUser = countEditsPerUser();
-        Stack<String> usernameStack = new Stack<String>();
-        for (Map.Entry<String, Integer> entry : editsPerUser.entrySet())
-        {
-            for (Map.Entry<String, Integer> secondEntry : editsPerUser.entrySet()){
-                if(secondEntry.getValue()>entry.getValue()){
-                    usernameStack.push(secondEntry.getKey());
-                }
-            }
-            System.out.println(usernameStack);
-        }
-
-        List<Revision> sortedRevisionList = new ArrayList<Revision>();
-        while(!usernameStack.empty()) {
-            for (int i = 0; i < revisionList.size(); i++) {
-                if (usernameStack.peek() == revisionList.get(i).getUsername()){
-                    sortedRevisionList.add(revisionList.get(i));
-                }
-
-            }
-            usernameStack.pop();
-        }
-        return sortedRevisionList;
-    }
-
-    /*
-    public List<Revision> sortByNumberOfEdits(){
-       Map<String,Integer> editsPerUser = countEditsPerUser();
-       Integer largest = 0;
-       for(int i=0;i<editsPerUser.size();i++){
-           if(editsPerUser.get(i).intValue()>largest){
-               largest = editsPerUser.get(i).intValue();
-               sortByNumberOfEdits();
-           } else{
-
-           }
-       }
-    }
-    */
-
 
     public int size(){
         return revisionList.size();
     }
+
     public Revision get(int i){
         return revisionList.get(i);
     }
 
+    public boolean isEmpty(){
+        if(this.revisionList.isEmpty()){
+            return true;
+        }
+        return false;
+    }
 
+    public String toString(){
+        String result = "";
+        for(int i =0;i<revisionList.size();i++){
+            result+= "Editor " + (i+1) + " -- " + revisionList.get(i).toString() + "\n";
+        }
+        return result;
+    }
 }
