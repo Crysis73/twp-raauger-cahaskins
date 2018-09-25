@@ -1,8 +1,5 @@
 import com.google.gson.JsonArray;
-import edu.bsu.cs222.Query;
-import edu.bsu.cs222.Revision;
-import edu.bsu.cs222.RevisionList;
-import edu.bsu.cs222.RevisionParser;
+import edu.bsu.cs222.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,6 +22,7 @@ public class testTWP {
         }
 
     }
+
     @Test
     public void testgetSortedByTimestampRevisions(){
 
@@ -53,6 +51,19 @@ public class testTWP {
         Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
         System.out.println(sortedListOfRevisions);
        // Assert.assertEquals(expectedResult,sortedListOfRevisions);
+    }
+
+    @Test
+    public void testMakeAuthor(){
+        RevisionList revisionList = new RevisionList("Soup");
+        Author author = new Author("Jph",2);
+        System.out.print(author);
+    }
+
+    @Test
+    public void testSortByNumberOfRevisions(){
+        RevisionList revisionList = new RevisionList("Soup");
+        System.out.println(revisionList.sortByNumberOfRevisions());
     }
 
 }
