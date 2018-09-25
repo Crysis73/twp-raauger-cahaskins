@@ -11,6 +11,8 @@ public class Query {
     public Reader getContents(String search) throws IOException {
         URL url;
         if(search.contains("\"")){
+            search = search.replaceAll("\"","%20");
+            System.out.println(search);
             url = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" + search + "&r%20vprop=timestamp%7Cuser&rvlimit=25&redirects");
 
         }else {

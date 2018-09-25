@@ -46,24 +46,17 @@ public class testTWP {
     }
 
     @Test
-    public void testcountEditsPerUser(){
-        RevisionList revisionList = new RevisionList("Soup");
-        Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
-        System.out.println(sortedListOfRevisions);
-       // Assert.assertEquals(expectedResult,sortedListOfRevisions);
-    }
-
-    @Test
     public void testMakeAuthor(){
         RevisionList revisionList = new RevisionList("Soup");
         Author author = new Author("Jph",2);
         System.out.print(author);
     }
 
+
     @Test
-    public void testSortByNumberOfRevisions(){
-        RevisionList revisionList = new RevisionList("Soup");
-        System.out.println(revisionList.sortByNumberOfRevisions());
+    public void testGenerateAuthors(){
+        RevisionList revisions = new RevisionList("Soup");
+        System.out.println(revisions.generateAuthors());
     }
 
 }

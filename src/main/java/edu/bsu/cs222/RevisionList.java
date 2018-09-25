@@ -10,6 +10,7 @@ public class RevisionList{
     public RevisionList(String searchTerm){
         RevisionParser parser = new RevisionParser(searchTerm);
         this.revisionList = parser.getRevisions();
+
     }
 
     public List<Revision> sortByTimestamp(){
@@ -27,44 +28,47 @@ public class RevisionList{
         return revisionList;
     }
 
-    public LinkedHashMap<String,Integer> countEditsPerUser(){
-        LinkedHashMap<String,Integer> revisionCounter = new LinkedHashMap<>();
-        Integer numberOfRevisions = 1;
-        for(int i=0;i<revisionList.size();i++) {
-            if(revisionCounter.containsKey(get(i).getUsername())) {
-                String key = revisionList.get(i).getUsername();
-                Integer replacementValue = revisionCounter.get(key).intValue()+1;
-                revisionCounter.replace(key,replacementValue);
-            } else {
-                revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
+    public List<Author> generateAuthors(){
+        Set<String> set = new HashSet();
+        Integer numberofEdits = 1;
+        List<Author> authors = new LinkedList<Author>();
+        for(int i =0;i<revisionList.size();i++){
+            String username = revisionList.get(i).getUsername();
+            Revision revision = revisionList.get(i);
+
+            if( set.add(username) == true){
+                Author author = new Author(revisionList.get(i).getUsername(),numberofEdits);
+                set.add(username);
+                author.addRevision(revision);
+                authors.add(author);
+            } else{
+
+                for(int j =0;j<authors.size();j++){
+                    if(authors.get(j).getAuthorUsername().equals(username)) {
+                        authors.get(j).addRevision(revision);
+                        authors.get(j).incrementCount();
+                    }
+                }
+
             }
         }
-        MapUtil sorter = new MapUtil();
-        revisionCounter = (LinkedHashMap<String, Integer>) sorter.sortByValue(revisionCounter);
-        return revisionCounter;
+        for(int i=0;i<authors.size();i++){
+            Integer compareNumberOfEntries = authors.get(i).getCount();
+            for(int j=i+1;j<authors.size();j++){
+                Integer secondCompareNumberOfEntries = authors.get(j).getCount();
+                if(compareNumberOfEntries<secondCompareNumberOfEntries){
+                    Author tempAuthor = authors.get(i);
+                    authors.set(i,authors.get(j));
+                    authors.set(j,tempAuthor);
+                }
+            }
+        }
+        authors = sortByNumberOfRevisions(authors);
+        return authors;
     }
 
-    public List<Author> sortByNumberOfRevisions(){
-        LinkedHashMap<String,Integer> revisionCounter = new LinkedHashMap<>();
-        Integer numberOfRevisions = 1;
-        for(int i=0;i<revisionList.size();i++) {
-            if(revisionCounter.containsKey(get(i).getUsername())) {
-                String key = revisionList.get(i).getUsername();
-                Integer replacementValue = revisionCounter.get(key).intValue()+1;
-                revisionCounter.replace(key,replacementValue);
-            } else {
-                revisionCounter.put(revisionList.get(i).getUsername(), numberOfRevisions);
-            }
-        }
-        List<Author> authorList = new ArrayList<>();
 
-        for(Map.Entry<String,Integer> entry: revisionCounter.entrySet()){
-            Author author = new Author(entry.getKey(),entry.getValue());
-            authorList.add(author);
-        }
-
-        List<Revision> sortedRevisionList = new ArrayList<Revision>();
-
+    public List<Author> sortByNumberOfRevisions(List<Author> authorList){
         for(int i=0;i<authorList.size();i++){
             Integer compareNumberOfEntries = authorList.get(i).getCount();
             for(int j=i+1;j<authorList.size();j++){
@@ -76,17 +80,6 @@ public class RevisionList{
                 }
             }
         }
-
-        for(int i =0;i<revisionList.size();i++) {
-            String revisionUsername = revisionList.get(i).getUsername();
-            for (int j = 0; j < authorList.size(); j++) {
-                String authorUsername = authorList.get(j).getAuthorUsername();
-                if (authorUsername == revisionUsername){
-                    authorList.get(j).addRevision(revisionList.get(i));
-                }
-            }
-        }
-
         return authorList;
 
     }

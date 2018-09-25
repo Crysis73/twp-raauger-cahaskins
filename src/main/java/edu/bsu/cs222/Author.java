@@ -26,15 +26,27 @@ public class Author {
         return count;
     }
 
-
-
     public String getAuthorUsername(){
         return authorUsername;
     }
 
     public String toString(){
-        return authorUsername +": "+revisionsByAuthor + " "+count+"\n";
+        String result = "";
+        result += authorUsername + "\n \tNumber of Edits: " + count ;
+        for(int i =0;i<revisionsByAuthor.size();i++) {
+            result += "\n \t\tRevision# : " + (i+1) + " " + revisionsByAuthor.get(i);
+            if(i == revisionsByAuthor.size()-1){
+                result+= "\n";
+            }
+        }
+        result.replaceAll(",","");
+        return result;
     }
+
+    public void incrementCount(){
+        count++;
+    }
+
 
 
 }
