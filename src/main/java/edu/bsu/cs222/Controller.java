@@ -45,7 +45,7 @@ public class Controller extends Application {
     public void start(Stage stage) throws IOException {
         window = stage;
         FXMLLoader loader = new FXMLLoader();
-        String fxmlDocPath = "C:\\Users\\Casey Haskins\\IdeaProjects\\twp-raauger-cahaskins\\src\\test\\resources\\userinterface.fxml";
+        String fxmlDocPath = "/Users/rebeccaauger/IdeaProjects/twp-raauger-cahaskins/src/test/resources/userinterface.fxml";
         FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
         Pane root = loader.load(fxmlStream);
         scene = new Scene(root);
