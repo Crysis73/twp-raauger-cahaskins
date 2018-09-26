@@ -45,30 +45,25 @@ public class Controller extends Application {
     public void start(Stage stage) throws IOException {
         window = stage;
         FXMLLoader loader = new FXMLLoader();
-        String fxmlDocPath = "/Users/rebeccaauger/IdeaProjects/twp-raauger-cahaskins/src/test/resources/userinterface.fxml";
+        String fxmlDocPath = "C:\\Users\\Casey Haskins\\IdeaProjects\\twp-raauger-cahaskins\\src\\test\\resources\\userinterface.fxml";
         FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
         Pane root = loader.load(fxmlStream);
         scene = new Scene(root);
         window.setScene(scene);
         window.setTitle("Two Week Project");
         window.show();
-
     }
 
 
-    @FXML
     public void createRevisionList(ActionEvent actionEvent) throws IOException {
         this.revisions = new RevisionList(inputText.getText());
         String output = revisions.toString();
         printOutput(output);
 
     }
-    @FXML
     public void printOutput(String output){
         outputText.setText(output);
     }
-
-    @FXML
     public void sortByNumberOfEdits(ActionEvent actionEvent){
         this.authors = new AuthorList(inputText.getText());
         String output = authors.toString();

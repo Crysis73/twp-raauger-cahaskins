@@ -17,6 +17,7 @@ import java.util.*;
 public class RevisionParser {
 
     private JsonObject rootObject;
+    private String redirects;
 
 
     public RevisionParser(String searchTerm){
@@ -31,6 +32,7 @@ public class RevisionParser {
         }
         JsonElement rootElement = parser.parse(reader);
         this.rootObject = rootElement.getAsJsonObject();
+        this.redirects = generateRedirects();
     }
 
     public List<Revision> getRevisions() {
@@ -49,13 +51,14 @@ public class RevisionParser {
         return revisionList;
 
     }
-    public String getRedirects(){
+
+    public String generateRedirects(){
         if(rootObject.has("redirects")) {
             JsonObject redirects = rootObject.getAsJsonObject("query").getAsJsonArray("redirects").get(0).getAsJsonObject();
             String redirectToPageName = redirects.get("to").toString();
             return redirectToPageName;
         }
-        return "No Redirects";
+        return null;
     }
 
     public String getUsername(JsonArray array, int index) {
@@ -74,6 +77,10 @@ public class RevisionParser {
         inputString = inputString.replace("T", " ");
         Timestamp timestamp = Timestamp.valueOf(inputString);
         return timestamp;
+    }
+
+    public String getRedirects(){
+        return this.redirects;
     }
 }
 
