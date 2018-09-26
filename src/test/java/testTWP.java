@@ -58,4 +58,10 @@ public class testTWP {
         System.out.println(revisions.generateAuthors());
     }
 
+    @Test
+    public void testGetRedirects(){
+        RevisionParser parser = new RevisionParser("Obama");
+        System.out.println(parser.getRedirects());
+    }
+
 }

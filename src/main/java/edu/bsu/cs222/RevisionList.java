@@ -6,11 +6,12 @@ import java.util.stream.Stream;
 
 public class RevisionList{
     private List<Revision> revisionList;
+    private String redirects;
 
     public RevisionList(String searchTerm){
         RevisionParser parser = new RevisionParser(searchTerm);
         this.revisionList = parser.getRevisions();
-
+        this.redirects = parser.getRedirects();
     }
 
     public List<Revision> sortByTimestamp(){
@@ -67,7 +68,6 @@ public class RevisionList{
         return authors;
     }
 
-
     public List<Author> sortByNumberOfRevisions(List<Author> authorList){
         for(int i=0;i<authorList.size();i++){
             Integer compareNumberOfEntries = authorList.get(i).getCount();
@@ -83,7 +83,6 @@ public class RevisionList{
         return authorList;
 
     }
-
 
     public int size(){
         return revisionList.size();
@@ -102,6 +101,9 @@ public class RevisionList{
 
     public String toString(){
         String result = "";
+        if(this.redirects!=null){
+            result += "You were redirected to : " + redirects;
+        }
         for(int i =0;i<revisionList.size();i++){
             result+= "Editor " + (i+1) + " -- " + revisionList.get(i).toString() + "\n";
         }
