@@ -20,7 +20,7 @@ public class Revision {
 
 
     public String toString(){
-        return "Username: "+username+" , Timestamp: "+timestamp;
+        return "Username: "+username+" , Time: "+timestamp;
     }
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.bsu.cs222.Controller">
+  <children>
+    <TextField fx:id="inputText" alignment="CENTER" disable="false" focusTraversable="true" layoutX="14.0" layoutY="49.0" onAction="#createRevisionList" prefHeight="21.0" prefWidth="200.0" promptText="Article Name" text="" />
+    <Text layoutX="69.0" layoutY="35.0" scaleX="1.6297128801051783" scaleY="2.00489476810923" smooth="true" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Wikipedia Article Revision Search" />
+    <TextArea fx:id="outputText" layoutX="14.0" layoutY="96.0" prefHeight="290.0" prefWidth="572.0" wrapText="true" />
+    <Button layoutX="221.0" layoutY="49.0" mnemonicParsing="false" onAction="#createRevisionList" text="Search" />
+    <MenuButton layoutX="443.0" layoutY="66.0" mnemonicParsing="false" text="Sort By">
+      <items>
+        <MenuItem mnemonicParsing="false" onAction="#createRevisionList" text="Recency" />
+        <MenuItem mnemonicParsing="false" onAction="#sortByNumberOfEdits" text="Author with Most Edits" />
+      </items>
+    </MenuButton>
+    <Button layoutX="530.0" layoutY="66.0" mnemonicParsing="false" onAction="#clearAllText" text="Clear" />
+  </children>
+</AnchorPane>

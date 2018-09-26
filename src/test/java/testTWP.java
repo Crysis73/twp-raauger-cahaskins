@@ -1,8 +1,5 @@
 import com.google.gson.JsonArray;
-import edu.bsu.cs222.Query;
-import edu.bsu.cs222.Revision;
-import edu.bsu.cs222.RevisionList;
-import edu.bsu.cs222.RevisionParser;
+import edu.bsu.cs222.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,13 +16,13 @@ public class testTWP {
 
     @Test
     public void testgetRevisions(){
-        RevisionParser parser = new RevisionParser();
-        List<Revision> revisionList = parser.getRevisions("Soup");
+        RevisionList revisionList = new RevisionList("soup");
         for(int i =0;i<revisionList.size();i++) {
             System.out.println(revisionList.get(i).toString());
         }
 
     }
+
     @Test
     public void testgetSortedByTimestampRevisions(){
 
@@ -49,36 +46,16 @@ public class testTWP {
     }
 
     @Test
-    public void testcountEditsPerUser(){
-        RevisionList revisionList = new RevisionList("sample.json");
-        Map<String,Integer> sortedListOfRevisions = revisionList.countEditsPerUser();
-        System.out.println(sortedListOfRevisions);
-       // Assert.assertEquals(expectedResult,sortedListOfRevisions);
+    public void testMakeAuthor(){
+        RevisionList revisionList = new RevisionList("Soup");
+        Author author = new Author("Jph",2);
+        System.out.print(author);
     }
 
-    /*
-   @Test
-    public void testgetUsername(){
-        RevisionParser parser = new RevisionParser();
-        JsonArray array = parser.getRevisions();
-        String result = parser.getUsername(array,0);
-        Assert.assertEquals("SemiHypercube",result);
-    }
     @Test
-    public void testgetTimestamp(){
-        RevisionParser parser = new RevisionParser();
-        JsonArray array = parser.getRevisions();
-        String result = parser.getTimestamp(array,0);
-        Assert.assertEquals("2018-08-14T20:34:45Z",result);
+    public void testGenerateAuthors(){
+        RevisionList revisions = new RevisionList("Soup");
+        System.out.println(revisions.generateAuthors());
     }
-    @Test
-    public void testgetRevisionList(){
-        RevisionParser parser = new RevisionParser();
-        JsonArray array = parser.getRevisions();
-        List<Revision> revisionList = parser.getRevisionList(array);
-        for(int i =0;i<revisionList.size();i++) {
-            System.out.println(revisionList.get(i).toString());
-        }
-    }
-    */
+
 }

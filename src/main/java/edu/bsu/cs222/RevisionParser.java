@@ -18,7 +18,9 @@ public class RevisionParser {
 
     private JsonObject rootObject;
 
+
     public RevisionParser(String searchTerm){
+
         JsonParser parser = new JsonParser();
         Query query = new Query();
         Reader reader = null;
