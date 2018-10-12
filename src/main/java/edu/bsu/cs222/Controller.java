@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,10 +58,13 @@ public class Controller extends Application {
 
 
     public void createRevisionList(ActionEvent actionEvent) throws IOException {
-        this.revisions = new RevisionList(inputText.getText());
-        String output = revisions.toString();
-        printOutput(output);
-
+        try {
+            this.revisions = new RevisionList(inputText.getText());
+            String output = revisions.toString();
+            printOutput(output);
+        }catch(NullPointerException e){
+            printOutput("No articles matching \"" +inputText.getText() + "\" were found. Please check your spelling and try again.");
+        }
     }
     public void printOutput(String output){
         outputText.setText(output);

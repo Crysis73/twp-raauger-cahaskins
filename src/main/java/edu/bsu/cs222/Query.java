@@ -20,8 +20,6 @@ public class Query {
         connection.setRequestProperty("User-Agent",
                 "Revision Tracker/0.1 (me@bsu.edu)");
         Reader in = new InputStreamReader(connection.getInputStream());
-
         return in;
-
     }
 }
