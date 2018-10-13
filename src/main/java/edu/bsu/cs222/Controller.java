@@ -57,7 +57,7 @@ public class Controller extends Application {
     }
 
 
-    public void createRevisionList(ActionEvent actionEvent) throws IOException {
+    public void createRevisionList(ActionEvent actionEvent){
         try {
             this.revisions = new RevisionList(inputText.getText());
             String output = revisions.toString();
@@ -66,7 +66,7 @@ public class Controller extends Application {
             printOutput("No articles matching \"" +inputText.getText() + "\" were found. Please check your spelling and try again.");
         }
     }
-    public void printOutput(String output){
+    private void printOutput(String output){
         outputText.setText(output);
     }
     public void sortByNumberOfEdits(ActionEvent actionEvent){

@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class RevisionList{
     private List<Revision> revisionList;
@@ -30,48 +29,36 @@ public class RevisionList{
     }
 
     public List<Author> generateAuthors(){
-        Set<String> set = new HashSet();
+        HashSet set = new HashSet();
         Integer numberofEdits = 1;
-        List<Author> authors = new LinkedList<Author>();
-        for(int i =0;i<revisionList.size();i++){
-            String username = revisionList.get(i).getUsername();
-            Revision revision = revisionList.get(i);
+        List<Author> authors = new LinkedList<>();
+        for (Revision aRevisionList : revisionList) {
+            String username = aRevisionList.getUsername();
 
-            if( set.add(username) == true){
-                Author author = new Author(revisionList.get(i).getUsername(),numberofEdits);
+            if (set.add(username)) {
+                Author author = new Author(aRevisionList.getUsername(), numberofEdits);
                 set.add(username);
-                author.addRevision(revision);
+                author.addRevision(aRevisionList);
                 authors.add(author);
-            } else{
+            } else {
 
-                for(int j =0;j<authors.size();j++){
-                    if(authors.get(j).getAuthorUsername().equals(username)) {
-                        authors.get(j).addRevision(revision);
-                        authors.get(j).incrementCount();
+                for (Author author : authors) {
+                    if (author.getAuthorUsername().equals(username)) {
+                        author.addRevision(aRevisionList);
+                        author.incrementCount();
                     }
                 }
 
-            }
-        }
-        for(int i=0;i<authors.size();i++){
-            Integer compareNumberOfEntries = authors.get(i).getCount();
-            for(int j=i+1;j<authors.size();j++){
-                Integer secondCompareNumberOfEntries = authors.get(j).getCount();
-                if(compareNumberOfEntries<secondCompareNumberOfEntries){
-                    Author tempAuthor = authors.get(i);
-                    authors.set(i,authors.get(j));
-                    authors.set(j,tempAuthor);
-                }
             }
         }
         authors = sortByNumberOfRevisions(authors);
         return authors;
     }
 
-    public List<Author> sortByNumberOfRevisions(List<Author> authorList){
+    private List<Author> sortByNumberOfRevisions(List<Author> authorList){
         for(int i=0;i<authorList.size();i++){
-            Integer compareNumberOfEntries = authorList.get(i).getCount();
             for(int j=i+1;j<authorList.size();j++){
+                Integer compareNumberOfEntries = authorList.get(i).getCount();
                 Integer secondCompareNumberOfEntries = authorList.get(j).getCount();
                 if(compareNumberOfEntries<secondCompareNumberOfEntries){
                     Author tempAuthor = authorList.get(i);
@@ -93,20 +80,17 @@ public class RevisionList{
     }
 
     public boolean isEmpty(){
-        if(this.revisionList.isEmpty()){
-            return true;
-        }
-        return false;
+        return this.revisionList.isEmpty();
     }
 
     public String toString(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         if(this.redirects!=null){
-            result += "You were redirected to : " + redirects;
+            result.append("You were redirected to : ").append(redirects).append("\n");
         }
         for(int i =0;i<revisionList.size();i++){
-            result+= "Editor " + (i+1) + " -- " + revisionList.get(i).toString() + "\n";
+            result.append("Editor ").append(i + 1).append(" -- ").append(revisionList.get(i).toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 }

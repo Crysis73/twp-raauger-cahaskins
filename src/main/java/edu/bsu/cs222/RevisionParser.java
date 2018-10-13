@@ -30,6 +30,8 @@ public class RevisionParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        assert reader != null;
         JsonElement rootElement = parser.parse(reader);
         this.rootObject = rootElement.getAsJsonObject();
         this.redirects = generateRedirects();
@@ -42,8 +44,9 @@ public class RevisionParser {
             JsonObject entryObject = entry.getValue().getAsJsonObject();
             array = entryObject.getAsJsonArray("revisions");
         }
-        List<Revision> revisionList = new ArrayList<Revision>();
+        List<Revision> revisionList = new ArrayList<>();
 
+        assert array != null;
         for (int i = 0; i < array.size(); i++) {
             Revision revision = new Revision(getUsername(array, i), getTimestamp(array, i));
             revisionList.add(revision);
@@ -52,31 +55,28 @@ public class RevisionParser {
 
     }
 
-    public String generateRedirects(){
-        if(rootObject.has("redirects")) {
+    private String generateRedirects(){
+        if(rootObject.getAsJsonObject("query").has("redirects")) {
             JsonObject redirects = rootObject.getAsJsonObject("query").getAsJsonArray("redirects").get(0).getAsJsonObject();
-            String redirectToPageName = redirects.get("to").toString();
-            return redirectToPageName;
+            return redirects.get("to").toString();
         }
         return null;
     }
 
-    public String getUsername(JsonArray array, int index) {
-        String username = array.get(index).getAsJsonObject().get("user").toString().replaceAll("\"", "");
-        return username;
+    private String getUsername(JsonArray array, int index) {
+        return array.get(index).getAsJsonObject().get("user").toString().replaceAll("\"", "");
     }
 
-    public Timestamp getTimestamp(JsonArray array, int index) {
+    private Timestamp getTimestamp(JsonArray array, int index) {
         String timestampString = array.get(index).getAsJsonObject().get("timestamp").toString().replaceAll("\"", "");
-        Timestamp timestamp = convertStringToTimestamp(timestampString);
-        return timestamp;
+        return convertStringToTimestamp(timestampString);
     }
 
-    public Timestamp convertStringToTimestamp(String inputString) {
+    private Timestamp convertStringToTimestamp(String inputString) {
         inputString = inputString.replace("Z", "");
         inputString = inputString.replace("T", " ");
         Timestamp timestamp = Timestamp.valueOf(inputString);
-        return timestamp;
+        return Timestamp.valueOf(timestamp.toLocalDateTime());
     }
 
     public String getRedirects(){
