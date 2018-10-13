@@ -70,7 +70,11 @@ public class Controller extends Application {
         outputText.setText(output);
     }
     public void sortByNumberOfEdits(ActionEvent actionEvent){
-        this.authors = new AuthorList(inputText.getText());
+        try {
+            this.authors = new AuthorList(inputText.getText());
+        }catch(NullPointerException e){
+            printOutput("Please search for an article before trying to sort!");
+        }
         String output = authors.toString();
         outputText.setText("");
         printOutput(output);
@@ -78,6 +82,8 @@ public class Controller extends Application {
     public void clearAllText(ActionEvent actionEvent) {
         inputText.setText("");
         outputText.setText("");
+        this.authors = null;
+        this.revisions = null;
     }
 
 }
